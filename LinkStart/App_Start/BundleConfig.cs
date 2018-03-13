@@ -9,7 +9,10 @@ namespace LinkStart
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/assets/js/chartist.min.js",
+                        "~/assets/js/paper-dashboard.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -20,12 +23,19 @@ namespace LinkStart
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/assets/js/bootstrap.min.js",
+                      "~/assets/js/bootstrap-notify.js",
+                      "~/assets/js/bootstrap-checkbox-radio.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/assets/css/animate.min.css",
+                      "~/assets/css/bootstrap.min.css",
+                      "~/assets/css/paper-dashboard.css",
+                      "~/assets/css/paper-dashboard.css",
+                      "~/assets/css/themify-icons.css",
+                      "~/assets/css/font-awesome.min.css",
+                      "~/assets/css/font.css"
+                      ));
         }
     }
 }
