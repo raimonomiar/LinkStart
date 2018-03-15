@@ -27,6 +27,7 @@ namespace LinkStart.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>().ToTable("User");
