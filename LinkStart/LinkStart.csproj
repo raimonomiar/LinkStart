@@ -192,25 +192,41 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Core\ViewModels\AddPhoneNumberViewModel.cs" />
+    <Compile Include="Core\ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="Core\ViewModels\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Core\ViewModels\ExternalLoginListViewModel.cs" />
+    <Compile Include="Core\ViewModels\FactorViewModel.cs" />
+    <Compile Include="Core\ViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\ForgotViewModel.cs" />
+    <Compile Include="Core\ViewModels\IndexViewModel.cs" />
+    <Compile Include="Core\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Core\ViewModels\ManageLoginsViewModel.cs" />
+    <Compile Include="Core\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Core\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\SendCodeViewModel.cs" />
+    <Compile Include="Core\ViewModels\SetPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\VerifyCodeViewModel.cs" />
+    <Compile Include="Core\ViewModels\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803041500491_Initial-Migration.cs" />
-    <Compile Include="Migrations\201803041500491_Initial-Migration.Designer.cs">
+    <Compile Include="Persistence\Migrations\201803041500491_Initial-Migration.cs" />
+    <Compile Include="Persistence\Migrations\201803041500491_Initial-Migration.Designer.cs">
       <DependentUpon>201803041500491_Initial-Migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803061548223_FirstAndLastNameAdded.cs" />
-    <Compile Include="Migrations\201803061548223_FirstAndLastNameAdded.Designer.cs">
+    <Compile Include="Persistence\Migrations\201803061548223_FirstAndLastNameAdded.cs" />
+    <Compile Include="Persistence\Migrations\201803061548223_FirstAndLastNameAdded.Designer.cs">
       <DependentUpon>201803061548223_FirstAndLastNameAdded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803061610488_RenameTables.cs" />
-    <Compile Include="Migrations\201803061610488_RenameTables.Designer.cs">
+    <Compile Include="Persistence\Migrations\201803061610488_RenameTables.cs" />
+    <Compile Include="Persistence\Migrations\201803061610488_RenameTables.Designer.cs">
       <DependentUpon>201803061610488_RenameTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Persistence\Migrations\Configuration.cs" />
+    <Compile Include="Core\Models\User.cs" />
+    <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -220,6 +236,7 @@
     <Content Include="assets\css\demo.css" />
     <Content Include="assets\css\font-awesome.min.css" />
     <Content Include="assets\css\font.css" />
+    <Content Include="assets\css\Login.css" />
     <Content Include="assets\css\paper-dashboard.css" />
     <Content Include="assets\css\themify-icons.css" />
     <Content Include="assets\fonts\themify.svg" />
@@ -332,12 +349,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\" />
-    <Folder Include="Core\" />
-    <Folder Include="Persistence\" />
+    <Folder Include="Core\Dtos\" />
+    <Folder Include="Core\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -353,13 +371,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803041500491_Initial-Migration.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201803041500491_Initial-Migration.resx">
       <DependentUpon>201803041500491_Initial-Migration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803061548223_FirstAndLastNameAdded.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201803061548223_FirstAndLastNameAdded.resx">
       <DependentUpon>201803061548223_FirstAndLastNameAdded.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803061610488_RenameTables.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201803061610488_RenameTables.resx">
       <DependentUpon>201803061610488_RenameTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

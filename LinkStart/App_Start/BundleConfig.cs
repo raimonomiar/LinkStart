@@ -34,7 +34,8 @@ namespace LinkStart
                       "~/assets/css/paper-dashboard.css",
                       "~/assets/css/themify-icons.css",
                       "~/assets/css/font-awesome.min.css",
-                      "~/assets/css/font.css"
+                      "~/assets/css/font.css",
+                      "~/assets/css/Login.css"
                       ));
         }
     }

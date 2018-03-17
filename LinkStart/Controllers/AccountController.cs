@@ -5,10 +5,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using LinkStart.Core.Models;
+using LinkStart.Core.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using LinkStart.Models;
 
 namespace LinkStart.Controllers
 {

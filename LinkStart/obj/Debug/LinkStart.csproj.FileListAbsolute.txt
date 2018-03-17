@@ -69,7 +69,7 @@ D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.csprojResolveAssembly
 D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.csproj.CoreCompileInputs.cache
 D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.dll
 D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.pdb
-D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.Migrations.InitialMigration.resources
 D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.csproj.GenerateResource.Cache
-D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.Migrations.FirstAndLastNameAdded.resources
-D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.Migrations.RenameTables.resources
+D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.Persistence.Migrations.InitialMigration.resources
+D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.Persistence.Migrations.FirstAndLastNameAdded.resources
+D:\Ongoing Project\LinkStart\LinkStart\obj\Debug\LinkStart.Persistence.Migrations.RenameTables.resources

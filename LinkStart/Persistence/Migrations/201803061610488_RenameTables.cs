@@ -1,8 +1,7 @@
-namespace LinkStart.Migrations
+using System.Data.Entity.Migrations;
+
+namespace LinkStart.Persistence.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class RenameTables : DbMigration
     {
         public override void Up()
