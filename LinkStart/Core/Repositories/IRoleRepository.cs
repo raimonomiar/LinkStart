@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LinkStart.Core.Repositories
 {
     public interface IRoleRepository
     {
+        void Add(IdentityRole role);
+
+        IEnumerable<IdentityRole> GetRoleList();
+
     }
 }

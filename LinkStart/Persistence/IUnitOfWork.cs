@@ -9,6 +9,8 @@ namespace LinkStart.Persistence
 {
     public interface IUnitOfWork
     {
+        IRoleRepository Role { get; }
         void Complete();
+
     }
 }
