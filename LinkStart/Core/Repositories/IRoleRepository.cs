@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LinkStart.Core.Repositories
@@ -12,7 +11,6 @@ namespace LinkStart.Core.Repositories
     {
         void Add(IdentityRole role);
 
-        IEnumerable<IdentityRole> GetRoleList();
-
+        IEnumerable<IdentityRole> GetRoles();
     }
 }
