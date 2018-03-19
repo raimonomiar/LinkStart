@@ -1,0 +1,84 @@
+﻿@model LinkStart.Core.ViewModels.RoleViewModel
+@{
+    ViewBag.Title = "Role";
+}
+<div class="row">
+    <div class="col-lg-6 col-md-5">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">
+                    Roles
+                </h4>
+                <p class="category">
+                    List of Roles for users
+                </p>
+            </div>
+            <div class="content table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                            S.N.
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{int i = 1;}
+                    @foreach (var items in Model.Roles)
+                    {
+                        @Html.HiddenFor(x=>items.Id)
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @items.Name
+                            </td>
+                            <td>
+                                Edit | Delete
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-4">
+        <div class="card">
+            <div class="header">
+                <h4>Add Or Edit</h4>
+                <p class="category">Manage Roles to Define Users permission.</p>
+            </div>
+            <div class="content">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        @Html.ValidationSummary(true,"",new{@class="text-warning"})
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Role.Name)
+                                @Html.TextBoxFor(x=>x.Role.Name,new {@class="form-control border-input",placeholder="Role Name"})
+                                @Html.ValidationMessageFor(x=>x.Role.Name, "", new { @class = "text-warning" })
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-left">
+                        <button type="submit" class="btn btn-info btn-fill btn-wd">Save</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
