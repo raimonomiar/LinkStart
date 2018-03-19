@@ -28,9 +28,8 @@ namespace LinkStart
                       "~/assets/js/bootstrap-checkbox-radio.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/assets/css/animate.min.css",
                       "~/assets/css/bootstrap.min.css",
-                      "~/assets/css/paper-dashboard.css",
+                      "~/assets/css/animate.min.css",
                       "~/assets/css/paper-dashboard.css",
                       "~/assets/css/themify-icons.css",
                       "~/assets/css/font-awesome.min.css",

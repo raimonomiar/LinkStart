@@ -169,3 +169,25 @@ E:\Ayush\LinkStart\LinkStart\bin\Ninject.Web.Mvc.xml
 E:\Ayush\LinkStart\LinkStart\bin\Ninject.Web.WebApi.xml
 E:\Ayush\LinkStart\LinkStart\bin\Ninject.Web.WebApi.WebHost.xml
 E:\Ayush\LinkStart\LinkStart\bin\System.Web.Http.WebHost.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\AutoMapper.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\Castle.Core.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.Common.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.Common.WebHost.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.Mvc.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.WebApi.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.WebApi.WebHost.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\System.Net.Http.Formatting.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\System.Web.Http.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\System.Web.Http.WebHost.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\WebActivatorEx.dll
+D:\Ongoing Project\LinkStart\LinkStart\bin\AutoMapper.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.Common.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.Common.WebHost.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.Mvc.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.WebApi.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\Ninject.Web.WebApi.WebHost.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\System.Net.Http.Formatting.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\System.Web.Http.xml
+D:\Ongoing Project\LinkStart\LinkStart\bin\System.Web.Http.WebHost.xml
