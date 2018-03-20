@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LinkStart.Core;
@@ -36,15 +37,15 @@ namespace LinkStart.Areas.Admin.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    model.Roles = _unitOfWork.RoleRepository.GetRoles();    
+                    model.Roles = _unitOfWork.RoleRepository.GetRoles();
 
-                    TempData
+                    TempData["Danger"] = String.Join("--", ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage)) ;
                     return View(model);
                 }
 
                 var role = new IdentityRole
                 {
-                    Name = model.Role.Name
+                    Name = model.RoleName
                 };
 
                 _unitOfWork.RoleRepository.Add(role);
@@ -64,6 +65,24 @@ namespace LinkStart.Areas.Admin.Controllers
 
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(string id)
+        {
+            var role = _unitOfWork.RoleRepository.GetSingleRole(id);
+
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new RoleViewModel
+            {
+                RoleName = role.Name,
+                Roles = _unitOfWork.RoleRepository.GetRoles()
+            };
+
+            return View("Index", model);
         }
     }
 }

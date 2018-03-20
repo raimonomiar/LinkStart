@@ -12,5 +12,6 @@ namespace LinkStart.Core.Repositories
         void Add(IdentityRole role);
 
         IEnumerable<IdentityRole> GetRoles();
+        IdentityRole GetSingleRole(string id);
     }
 }

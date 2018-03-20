@@ -17,13 +17,13 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>
+                        <th class="text-center">
                             S.N.
                         </th>
                         <th>
                             Name
                         </th>
-                        <th>
+                        <th class="text-right">
                             Action
                         </th>
                     </tr>
@@ -32,16 +32,20 @@
                     @{int i = 1;}
                     @foreach (var items in Model.Roles)
                     {
-                        @Html.HiddenFor(x=>items.Id)
                         <tr>
-                            <td>
+                            <td class="text-center">
                                 @i
                             </td>
                             <td>
                                 @items.Name
                             </td>
-                            <td>
-                                Edit | Delete
+                            <td class="td-actions text-right">
+                                <a href="@Url.Action("Edit","Role",new{id=items.Id})" rel="tooltip" title="Edit Role" class="btn btn-success btn-simple btn-xs" >
+                                    <i class="ti-pencil-alt"></i>
+                                </a>
+                                <a href="#" rel="tooltip" title="Delete Role" class="btn btn-danger btn-simple btn-xs" >
+                                    <i class="ti-close"></i>
+                                </a>
                             </td>
                         </tr>
                         i++;
@@ -54,31 +58,40 @@
     
     <div class="col-lg-3 col-md-4">
         <div class="card">
-            <div class="header">
-                <h4>Add Or Edit</h4>
-                <p class="category">Manage Roles to Define Users permission.</p>
-            </div>
-            <div class="content">
+         
+           
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
-                    <div class="row">
-                        @Html.ValidationSummary(true,"",new{@class="text-warning"})
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.Role.Name)
-                                @Html.TextBoxFor(x=>x.Role.Name,new {@class="form-control border-input",placeholder="Role Name"})
-                                @Html.ValidationMessageFor(x=>x.Role.Name, "", new { @class = "text-warning" })
+                    <div class="header">
+                        <h4 class="title">Add Or Edit</h4>
+                    </div>
+                    @Html.ValidationSummary(true, "", new {@class = "text-warning"})
+                    <div class="content">
+                          
 
-                            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.RoleName,new{@class="control-label"})
+                            @Html.TextBoxFor(x => x.RoleName, new {@class = "form-control border-input", placeholder = "Role Name"})
+                            @Html.ValidationMessageFor(x => x.RoleName, "", new {@class = "text-warning"})
+
                         </div>
+                        <div class="category">
+                            Add Roles to Define user permission
+                        </div>
+                      
+                    </div>
+                 
+                    <div class="footer text-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info btn-fill btn-wd">Save</button>
 
+                        </div>
                     </div>
-                    <div class="text-left">
-                        <button type="submit" class="btn btn-info btn-fill btn-wd">Save</button>
-                    </div>
+            
+                 
                 }
-            </div>
+       
         </div>
     </div>
 </div>

@@ -20,5 +20,6 @@ namespace LinkStart.Persistence.Repositories
         }
 
         public IEnumerable<IdentityRole> GetRoles() => _context.Roles.ToList();
+        public IdentityRole GetSingleRole(string id) => _context.Roles.SingleOrDefault(x => x.Id == id);
     }
 }
