@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LinkStart.Core.Repositories
@@ -11,7 +7,9 @@ namespace LinkStart.Core.Repositories
     {
         void Add(IdentityRole role);
 
+        void Update(IdentityRole role);
         IEnumerable<IdentityRole> GetRoles();
         IdentityRole GetSingleRole(string id);
+        void Delete(IdentityRole role);
     }
 }

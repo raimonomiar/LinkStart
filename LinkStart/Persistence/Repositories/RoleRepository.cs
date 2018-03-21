@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using LinkStart.Core.Repositories;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -19,7 +18,18 @@ namespace LinkStart.Persistence.Repositories
             _context.Roles.Add(role);
         }
 
+        public void Update(IdentityRole role)
+        {
+            _context.Entry(role).State = EntityState.Modified;
+        }
+
         public IEnumerable<IdentityRole> GetRoles() => _context.Roles.ToList();
+
         public IdentityRole GetSingleRole(string id) => _context.Roles.SingleOrDefault(x => x.Id == id);
+
+        public void Delete(IdentityRole role)
+        {
+            _context.Roles.Remove(role);
+        }
     }
 }

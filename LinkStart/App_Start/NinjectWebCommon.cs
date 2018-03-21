@@ -1,8 +1,6 @@
-﻿using LinkStart.App_Start;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Web;
+using LinkStart;
 using LinkStart.Core;
 using LinkStart.Core.Repositories;
 using LinkStart.Persistence;
@@ -17,7 +15,7 @@ using Ninject.Web.Common.WebHost;
 
 
 
-namespace LinkStart.App_Start
+namespace LinkStart
 {
     public static class NinjectWebCommon
     {
@@ -62,6 +60,8 @@ namespace LinkStart.App_Start
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
 
             kernel.Bind<IRoleRepository>().To<RoleRepository>();
+
+            kernel.Bind<IUserRepository>().To<UserRepository>();
         }
     }
 }

@@ -230,11 +230,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repositories\IRoleRepository.cs" />
+    <Compile Include="Core\Repositories\IUserRepository.cs" />
     <Compile Include="Core\ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="Core\ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Core\ViewModels\ConfigureTwoFactorViewModel.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Core\ViewModels\RoleViewModel.cs" />
     <Compile Include="Core\ViewModels\SendCodeViewModel.cs" />
     <Compile Include="Core\ViewModels\SetPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\UserViewModel.cs" />
     <Compile Include="Core\ViewModels\VerifyCodeViewModel.cs" />
     <Compile Include="Core\ViewModels\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Global.asax.cs">
@@ -271,6 +274,7 @@
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Models\User.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repositories\UserRepository.cs" />
     <Compile Include="Persistence\Repositories\RoleRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -299,7 +303,6 @@
     <Content Include="assets\js\bootstrap-notify.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\chartist.min.js" />
-    <Content Include="assets\js\demo.js" />
     <Content Include="assets\js\jquery-1.10.2.js" />
     <Content Include="assets\js\paper-dashboard.js" />
     <Content Include="Content\Site.css" />
@@ -355,6 +358,7 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

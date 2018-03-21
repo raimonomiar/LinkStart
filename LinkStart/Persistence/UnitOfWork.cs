@@ -17,9 +17,12 @@ namespace LinkStart.Persistence
 
             RoleRepository = new RoleRepository(context);
 
+            UserRepository = new UserRepository(context);
         }
 
         public IRoleRepository RoleRepository { get; private set; }
+
+        public IUserRepository UserRepository { get; private set; }
         public void Complete()
         {
             _context.SaveChanges();

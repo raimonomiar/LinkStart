@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using LinkStart.Core;
 using LinkStart.Core.ViewModels;
@@ -58,9 +56,9 @@ namespace LinkStart.Areas.Admin.Controllers
 
           
             }
-            catch (Exception e)
+            catch (DbEntityValidationException e)
             {
-                TempData["Danger"] = $"Oops.. Something went wrong {e.Message}";
+                TempData["Danger"] = $"Oops.. Something went wrong {String.Join("--",e.EntityValidationErrors.SelectMany(x=>x.ValidationErrors).Select(x=>x.ErrorMessage))}";
             }
 
 
@@ -78,11 +76,68 @@ namespace LinkStart.Areas.Admin.Controllers
 
             var model = new RoleViewModel
             {
+                Id = role.Id,
                 RoleName = role.Name,
                 Roles = _unitOfWork.RoleRepository.GetRoles()
             };
 
             return View("Index", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(RoleViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    model.Roles = _unitOfWork.RoleRepository.GetRoles();
+
+                    TempData["Danger"] = String.Join("--", ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage));
+
+                    return View("Index",model) ;
+                }
+
+                var role = new IdentityRole
+                {
+                    Id = model.Id,
+                    Name = model.RoleName,
+
+                };
+
+                _unitOfWork.RoleRepository.Update(role);
+
+                _unitOfWork.Complete();
+
+                TempData["Success"] = "Role Updated !";
+            }
+            catch (Exception e)
+            {
+                TempData["Danger"] = $"Oops.. Something went wrong {e.Message}";
+
+            }
+
+            model.Roles = _unitOfWork.RoleRepository.GetRoles();
+            return View("Index", model);
+        }
+
+        public ActionResult Delete(string id)
+        {
+            var role = _unitOfWork.RoleRepository.GetSingleRole(id);
+
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+
+            _unitOfWork.RoleRepository.Delete(role);
+
+            _unitOfWork.Complete();
+
+            TempData["Success"] = "Role Deleted !";
+
+            return RedirectToAction("Index");
         }
     }
 }

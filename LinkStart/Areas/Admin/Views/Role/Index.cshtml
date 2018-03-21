@@ -6,12 +6,14 @@
     <div class="col-lg-6 col-md-5">
         <div class="card">
             <div class="header">
-                <h4 class="title">
+                <h4 class="title col-md-4">
                     Roles
                 </h4>
-                <p class="category">
+                <a href="@Url.Action("Index")" class="pull-right btn btn-wd">Add Role</a>
+                <p class="category col-md-8">
                     List of Roles for users
                 </p>
+                
             </div>
             <div class="content table-responsive">
                 <table class="table table-striped">
@@ -43,7 +45,7 @@
                                 <a href="@Url.Action("Edit","Role",new{id=items.Id})" rel="tooltip" title="Edit Role" class="btn btn-success btn-simple btn-xs" >
                                     <i class="ti-pencil-alt"></i>
                                 </a>
-                                <a href="#" rel="tooltip" title="Delete Role" class="btn btn-danger btn-simple btn-xs" >
+                                <a href="@Url.Action("Delete","Role",new{id= items.Id})" rel="tooltip" title="Delete Role" class="btn btn-danger btn-simple btn-xs del" >
                                     <i class="ti-close"></i>
                                 </a>
                             </td>
@@ -96,3 +98,21 @@
     </div>
 </div>
 <div class="clearfix"></div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function() {
+
+            $(".del").click(function() {
+
+                if (!confirm("Are you Sure you want to delete the role?")) {
+                    return false;
+
+                }
+
+            });
+
+        });
+    </script>
+}
