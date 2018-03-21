@@ -15,5 +15,7 @@ namespace LinkStart.Persistence.Repositories
         }
 
         public IEnumerable<User> GetUsers() => _context.Users.ToList();
+
+        public User GetSingleUser(string id) => _context.Users.FirstOrDefault(x => x.Id == id);
     }
 }

@@ -29,5 +29,10 @@ namespace LinkStart.Core.ViewModels
         [StringLength(100)]
         [Display(Name="Last Name")]
         public string LastName { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Display(Name ="Username" )]
+        public string Username { get; set; }
     }
 }

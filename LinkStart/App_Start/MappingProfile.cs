@@ -8,5 +8,6 @@ namespace LinkStart.App_Start
 {
     public class MappingProfile : Profile
     {
+
     }
 }

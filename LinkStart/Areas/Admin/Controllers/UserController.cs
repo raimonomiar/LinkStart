@@ -26,5 +26,18 @@ namespace LinkStart.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        public ActionResult Edit(string id)
+        {
+            var user = _unitOfWork.UserRepository.GetSingleUser(id);
+
+            if (user==null)
+            {
+                return HttpNotFound();
+            }
+
+            var
+        }
+
     }
 }

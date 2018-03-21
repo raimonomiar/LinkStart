@@ -6,5 +6,6 @@ namespace LinkStart.Core.Repositories
     public interface IUserRepository
     {
         IEnumerable<User> GetUsers();
+        User GetSingleUser(string id);
     }
 }
