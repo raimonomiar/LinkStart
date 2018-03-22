@@ -7,5 +7,6 @@ namespace LinkStart.Core.Repositories
     {
         IEnumerable<User> GetUsers();
         User GetSingleUser(string id);
+        void Update(User user);
     }
 }

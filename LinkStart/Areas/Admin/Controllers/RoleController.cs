@@ -37,7 +37,8 @@ namespace LinkStart.Areas.Admin.Controllers
                 {
                     model.Roles = _unitOfWork.RoleRepository.GetRoles();
 
-                    TempData["Danger"] = String.Join("--", ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage)) ;
+                    TempData["Danger"] = String.Join("--",
+                        ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage));
                     return View(model);
                 }
 
@@ -50,15 +51,21 @@ namespace LinkStart.Areas.Admin.Controllers
 
                 _unitOfWork.Complete();
 
-               
+
 
                 TempData["Success"] = $"Role Added !";
 
-          
+
             }
             catch (DbEntityValidationException e)
             {
-                TempData["Danger"] = $"Oops.. Something went wrong {String.Join("--",e.EntityValidationErrors.SelectMany(x=>x.ValidationErrors).Select(x=>x.ErrorMessage))}";
+                TempData["Danger"] =
+                    $"Oops.. Something went wrong {String.Join("--", e.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage))}";
+            }
+            catch (Exception ex)
+            {
+                TempData["Danger"] = $"Oops.. Something went wrong {ex.Message}";
+
             }
 
 
@@ -111,6 +118,11 @@ namespace LinkStart.Areas.Admin.Controllers
                 _unitOfWork.Complete();
 
                 TempData["Success"] = "Role Updated !";
+            }
+            catch (DbEntityValidationException e)
+            {
+                TempData["Danger"] =
+                    $"Oops.. Something went wrong {String.Join("--", e.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage))}";
             }
             catch (Exception e)
             {

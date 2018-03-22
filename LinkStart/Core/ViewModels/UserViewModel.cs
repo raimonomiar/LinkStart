@@ -27,7 +27,7 @@ namespace LinkStart.Core.ViewModels
         [Display(Name = "Username")]
         public string UserName { get; set; }
 
-        [Required]
+
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }

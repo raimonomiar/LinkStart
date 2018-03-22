@@ -50,11 +50,11 @@
                                 </td>
 
                                 <td class="td-actions text-right">
-                                    <a href="@Url.Action("Edit","User",new{id=items.Id})" rel="tooltip" title="Edit User" class="btn btn-success btn-simple btn-xs user">
-                                        <i class="ti-pencil-alt"></i>
+                                    <a href="#" rel="tooltip" title="Edit User" class="btn btn-success btn-simple btn-xs" >
+                                        <i class="ti-pencil-alt user" data-user-id="@items.Id"></i>
                                     </a>
-                                    <a href="#" rel="tooltip" title="Assign Role" class="btn btn-danger btn-simple btn-xs role">
-                                        <i class="ti-key"></i>
+                                    <a href="#" rel="tooltip" title="Assign Role" class="btn btn-danger btn-simple btn-xs ">
+                                        <i class="ti-key role" data-user-id="@items.Id"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -70,7 +70,7 @@
         <div class="card">
 
 
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Edit","User"))
             {
                 @Html.AntiForgeryToken()
                 <div class="header">
@@ -78,7 +78,7 @@
                 </div>
                 @Html.ValidationSummary(true, "", new { @class = "text-warning" })
                 <div class="content">
-
+                    @Html.HiddenFor(x=>x.UserId)
 
                     <div class="form-group">
                         @Html.LabelFor(x => x.FirstName, new { @class = "control-label" })
@@ -135,19 +135,20 @@
                 @Html.AntiForgeryToken()
                 <div class="header">
                     <h4 class="title">Add Or Edit</h4>
-                </div>
+                </div>  
                 @Html.ValidationSummary(true, "", new { @class = "text-warning" })
             <div class="content">
 
 
                 <div class="form-group">
                     
+                    @Html.HiddenFor(x=>x.UserId)
 
                     @Html.LabelFor(x => x.RoleId, new {@class = "control-label"})
-                    @Html.DropDownListFor(x => x.RoleId,new List<SelectListItem>
-                    {
-                        new SelectListItem{Value = "1",Text = "Admin"},new SelectListItem{Value = "2",Text="User"}
-                    },"--Select Role--", new {@class = "form-control border-input"})
+                    @*@Html.DropDownListFor(x => x.RoleId,new List<SelectListItem>(),"--Select Role--", new {@class = "form-control border-input drop"})*@
+                    <select class="form-control drop" id="RoleId">
+                        <option value="">Select </option>
+                    </select>
                     @Html.ValidationMessageFor(x => x.RoleId, "", new {@class = "text-warning"})
 
                 </div>
@@ -178,14 +179,53 @@
 
         $(function() {
 
-            $(".user").click(function() {
+            $(".user").click(function(e) {
 
                 $(".userdiv").toggle("slow");
+
+                var link = $(e.target);
+                $.ajax({
+                    url: "/api/user/" + link.attr("data-user-id"),
+                    method: "GET",
+                    success: function (data) {
+
+                        $("#UserId").val(data["Id"]);
+
+                        $("#FirstName").val(data["FirstName"]);
+
+                        $("#LastName").val(data["LastName"]);
+
+                        $("#Email").val(data["Email"]);
+
+                        $("#UserName").val(data["UserName"]);
+
+                        $("#PhoneNumber").val(data["PhoneNumber"]);
+                    },
+                    error:function() {
+                        alert("Something went wrong !");
+                    }
+                
+                });
             });
 
-            $(".role").click(function() {
+            $(".role").click(function(e) {
 
                 $(".rolediv").toggle("slow");
+
+                var link = $(e.target);
+
+                $("#UserId").val(link.attr("data-user-id"));
+
+                $.ajax({
+                    url: "/api/user",
+                    method: "GET",
+                    sucess: function(datas) {
+
+                        $.each(datas,function(i) {
+                                $(".drop").append($("<option></option>").val(datas[i].Id).html(datas[i].Name));
+                            });
+                    }
+                });
             });
 
 

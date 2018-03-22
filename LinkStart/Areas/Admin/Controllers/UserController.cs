@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using LinkStart.Core;
+using LinkStart.Core.Models;
 using LinkStart.Core.ViewModels;
 
 namespace LinkStart.Areas.Admin.Controllers
@@ -27,17 +30,55 @@ namespace LinkStart.Areas.Admin.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(string id)
-        {
-            var user = _unitOfWork.UserRepository.GetSingleUser(id);
 
-            if (user==null)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(UserViewModel model)
+        {
+            try
             {
-                return HttpNotFound();
+                if (!ModelState.IsValid)
+                {
+                    model.Users = _unitOfWork.UserRepository.GetUsers();
+
+                    TempData["Danger"] = String.Join("--", ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage));
+
+                    return View("Index", model);
+                }
+
+                var user = new User
+                {
+                    Id = model.UserId,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    UserName = model.UserName
+                };
+
+                _unitOfWork.UserRepository.Update(user);
+
+                _unitOfWork.Complete();
+
+                TempData["Success"] = "User Updated !";
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                TempData["Danger"] =
+                    $"Oops.. Something went wrong {String.Join("--", e.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage))}";
+            }
+            catch (Exception e)
+            {
+                TempData["Danger"] = $"Oops.. Something went wrong {e.Message}";
+
             }
 
-            var
+            model.Users = _unitOfWork.UserRepository.GetUsers();
+
+            return View("Index", model);
         }
+    
 
     }
 }
