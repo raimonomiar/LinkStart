@@ -24,14 +24,21 @@ namespace LinkStart.Areas.Admin.Controllers
         {
             var model = new UserViewModel
             {
-                Users = _unitOfWork.UserRepository.GetUsers()
+                Users = _unitOfWork.UserRepository.GetUsers(),
+                RoleList =  _unitOfWork.RoleRepository.GetRoles().Select(
+                    x=>new SelectListItem
+                    {
+                        Value = x.Id,
+                        Text = x.Name
+                    }).ToList()
+
             };
 
             return View(model);
         }
 
 
-        [HttpPost]
+      /*  [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserViewModel model)
         {
@@ -77,8 +84,16 @@ namespace LinkStart.Areas.Admin.Controllers
             model.Users = _unitOfWork.UserRepository.GetUsers();
 
             return View("Index", model);
-        }
-    
+        }*/
 
+        //    public ActionResult Assign(string id)
+        //    {
+        //        var model = new AssignRoleViewModel
+        //        {
+        //            UserId = id,
+        //            RoleList = _unitOfWork.RoleRepository
+
+        //        };
+        //    }
     }
 }

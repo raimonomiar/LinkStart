@@ -70,7 +70,7 @@
         <div class="card">
 
 
-            @using (Html.BeginForm("Edit","User"))
+            @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
                 <div class="header">
@@ -118,7 +118,7 @@
 
                 <div class="footer text-center">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info btn-fill btn-wd">Save</button>
+                        <input type="button" id="btnSubmit"  class="btn btn-info btn-fill btn-wd" value="Save"/>
 
                     </div>
                 </div>
@@ -145,10 +145,8 @@
                     @Html.HiddenFor(x=>x.UserId)
 
                     @Html.LabelFor(x => x.RoleId, new {@class = "control-label"})
-                    @*@Html.DropDownListFor(x => x.RoleId,new List<SelectListItem>(),"--Select Role--", new {@class = "form-control border-input drop"})*@
-                    <select class="form-control drop" id="RoleId">
-                        <option value="">Select </option>
-                    </select>
+                    @Html.DropDownListFor(x => x.RoleId,Model.RoleList,"--Select Role--", new {@class = "form-control border-input drop"})
+                
                     @Html.ValidationMessageFor(x => x.RoleId, "", new {@class = "text-warning"})
 
                 </div>
@@ -216,16 +214,42 @@
 
                 $("#UserId").val(link.attr("data-user-id"));
 
+                //$.ajax({
+                //    url: "/api/user",
+                //    method: "GET",
+                //    sucess: function(datas) {
+
+                //        $.each(datas,function(i) {
+                //                $(".drop").append($("<option></option>").val(datas[i].Id).html(datas[i].Name));
+                //            });
+                //    }
+                //});
+            });
+
+            $("#btnSubmit").click(function() {
+
+                var Id = $("#UserId").val();
+
+                var FirstName = $("#FirstName").val();
+
+                var LastName = $("#LastName").val();
+
+                var Email = $("#Email").val();
+
+                var UserName = $("#UserName").val();
+
+                var PhoneNumber = $("#PhoneNumber").val();
+
                 $.ajax({
                     url: "/api/user",
-                    method: "GET",
-                    sucess: function(datas) {
+                    method: "PUT",
+                    data: {UserId:Id,FirstName:FirstName,LastName:LastName,Email:Email,UserName:UserName,PhoneNumber:PhoneNumber} ,
+                    success: function() {
 
-                        $.each(datas,function(i) {
-                                $(".drop").append($("<option></option>").val(datas[i].Id).html(datas[i].Name));
-                            });
+                        bootbox.alert("Record Updated !");
                     }
                 });
+
             });
 
 

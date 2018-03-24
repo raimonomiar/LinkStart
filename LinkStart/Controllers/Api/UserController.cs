@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using AutoMapper;
 using LinkStart.Core;
 using LinkStart.Core.Dtos;
 using LinkStart.Core.Models;
+using LinkStart.Core.ViewModels;
 
 namespace LinkStart.Controllers.Api
 {
@@ -32,19 +34,43 @@ namespace LinkStart.Controllers.Api
 
         }
 
-        [HttpGet]
-        public IEnumerable<Iden> GetRoles()
+        [HttpPut]
+        public IHttpActionResult Update([FromBody] UserViewModel model)
         {
-            var roles = _unitOfWork.RoleRepository.GetRoles();
-
-            if (roles == null)
+            try
             {
-                return NotFound();
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                var user = new User
+                {
+                    Id = model.UserId,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    UserName = model.UserName,
+                    PhoneNumber = model.PhoneNumber
+                };
+
+                _unitOfWork.UserRepository.Update(user);
+
+                _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
 
-            return Json(roles);
+            return Ok();
 
         }
+
+
+
+    
 
     }
 }

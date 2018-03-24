@@ -7,6 +7,8 @@ namespace LinkStart.Core
         IUserRepository UserRepository { get; }
 
         IRoleRepository RoleRepository { get; }
+
+        IUserRoleRepository UserRoleRepository { get};
         void Complete();
 
     }
