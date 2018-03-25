@@ -28,7 +28,7 @@ namespace LinkStart.Areas.Admin.Controllers
                 RoleList =  _unitOfWork.RoleRepository.GetRoles().Select(
                     x=>new SelectListItem
                     {
-                        Value = x.Id,
+                        Value = x.Name,
                         Text = x.Name
                     }).ToList()
 
