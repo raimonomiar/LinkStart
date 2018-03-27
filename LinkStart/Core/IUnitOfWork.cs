@@ -1,4 +1,5 @@
-﻿using LinkStart.Core.Repositories;
+﻿using System.Threading.Tasks;
+using LinkStart.Core.Repositories;
 
 namespace LinkStart.Core
 {
@@ -9,7 +10,7 @@ namespace LinkStart.Core
         IRoleRepository RoleRepository { get; }
 /*
         IUserRoleRepository UserRoleRepository { get}*/
-        void Complete();
+        Task Complete();
 
     }
 }

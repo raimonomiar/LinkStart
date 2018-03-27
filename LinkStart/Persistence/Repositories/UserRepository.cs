@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using LinkStart.Core.Models;
 using LinkStart.Core.Repositories;
 
@@ -15,9 +16,9 @@ namespace LinkStart.Persistence.Repositories
             _context = context;
         }
 
-        public IEnumerable<User> GetUsers() => _context.Users.ToList();
+        public async Task<IEnumerable<User>> GetUsers() => await _context.Users.ToListAsync();
 
-        public User GetSingleUser(string id) => _context.Users.FirstOrDefault(x => x.Id == id);
+        public async Task<User>  GetSingleUser(string id) =>  await  _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         public void Update(User user)
         {
             _context.Entry(user).State = EntityState.Modified;

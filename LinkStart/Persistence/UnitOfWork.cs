@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using LinkStart.Core;
 using LinkStart.Core.Repositories;
@@ -23,9 +24,9 @@ namespace LinkStart.Persistence
         public IRoleRepository RoleRepository { get; private set; }
 
         public IUserRepository UserRepository { get; private set; }
-        public void Complete()
+        public async Task Complete()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

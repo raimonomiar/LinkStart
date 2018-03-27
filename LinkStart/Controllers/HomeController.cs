@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LinkStart.Controllers
 {
+    [Authorize(Roles = "User")]
     public class HomeController : Controller
     {
         public ActionResult Index()

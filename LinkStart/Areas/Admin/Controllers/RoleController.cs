@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using LinkStart.Core;
 using LinkStart.Core.ViewModels;
@@ -16,11 +17,11 @@ namespace LinkStart.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
         // GET: Admin/Role
-        public ActionResult Index()
+        public async Task<ActionResult > Index()
         {
             var model = new RoleViewModel
             {
-                Roles = _unitOfWork.RoleRepository.GetRoles(),
+                Roles = await _unitOfWork.RoleRepository.GetRoles(),
 
             };
 
@@ -29,13 +30,13 @@ namespace LinkStart.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(RoleViewModel model)
+        public async Task<ActionResult> Index(RoleViewModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    model.Roles = _unitOfWork.RoleRepository.GetRoles();
+                    model.Roles = await _unitOfWork.RoleRepository.GetRoles();
 
                     TempData["Danger"] = String.Join("--",
                         ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage));
@@ -49,7 +50,7 @@ namespace LinkStart.Areas.Admin.Controllers
 
                 _unitOfWork.RoleRepository.Add(role);
 
-                _unitOfWork.Complete();
+                await _unitOfWork.Complete();
 
 
 
@@ -72,9 +73,9 @@ namespace LinkStart.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(string id)
+        public async Task<ActionResult>  Edit(string id)
         {
-            var role = _unitOfWork.RoleRepository.GetSingleRole(id);
+            var role = await _unitOfWork.RoleRepository.GetSingleRole(id);
 
             if (role == null)
             {
@@ -83,9 +84,9 @@ namespace LinkStart.Areas.Admin.Controllers
 
             var model = new RoleViewModel
             {
-                Id = role.Id,
+                Id =  role.Id,
                 RoleName = role.Name,
-                Roles = _unitOfWork.RoleRepository.GetRoles()
+                Roles = await  _unitOfWork.RoleRepository.GetRoles()
             };
 
             return View("Index", model);
@@ -93,13 +94,13 @@ namespace LinkStart.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(RoleViewModel model)
+        public async Task<ActionResult>  Edit(RoleViewModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    model.Roles = _unitOfWork.RoleRepository.GetRoles();
+                    model.Roles = await _unitOfWork.RoleRepository.GetRoles();
 
                     TempData["Danger"] = String.Join("--", ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage));
 
@@ -115,7 +116,7 @@ namespace LinkStart.Areas.Admin.Controllers
 
                 _unitOfWork.RoleRepository.Update(role);
 
-                _unitOfWork.Complete();
+               await _unitOfWork.Complete();
 
                 TempData["Success"] = "Role Updated !";
             }
@@ -130,13 +131,13 @@ namespace LinkStart.Areas.Admin.Controllers
 
             }
 
-            model.Roles = _unitOfWork.RoleRepository.GetRoles();
+            model.Roles = await _unitOfWork.RoleRepository.GetRoles();
             return View("Index", model);
         }
 
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            var role = _unitOfWork.RoleRepository.GetSingleRole(id);
+            var role = await _unitOfWork.RoleRepository.GetSingleRole(id);
 
             if (role == null)
             {
@@ -145,7 +146,7 @@ namespace LinkStart.Areas.Admin.Controllers
 
             _unitOfWork.RoleRepository.Delete(role);
 
-            _unitOfWork.Complete();
+           await _unitOfWork.Complete();
 
             TempData["Success"] = "Role Deleted !";
 

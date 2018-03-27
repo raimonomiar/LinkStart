@@ -145,7 +145,7 @@
                     @Html.HiddenFor(x=>x.UserId)
 
                     @Html.LabelFor(x => x.RoleId, new {@class = "control-label"})
-                    @Html.DropDownListFor(x => x.RoleId,Model.RoleList,"--Select Role--", new {@class = "form-control border-input drop"})
+                    @Html.DropDownListFor(x => x.RoleId,Model.RoleList,"--Select Role--", new {@class = "form-control border-input drop",required="required"})
                 
                     @Html.ValidationMessageFor(x => x.RoleId, "", new {@class = "text-warning"})
 
@@ -160,6 +160,8 @@
                 <div class="footer text-center">
                     <div class="form-group">
                         <input type="button" id="btnSubmitR"  class="btn btn-info btn-fill btn-wd" value="Save"/>
+                        
+                        <input type="button" id="btnSubmitRR" class="btn btn-info btn-fill btn-wd" value="Remove"/>
 
 
                     </div>
@@ -186,7 +188,7 @@
                 $.ajax({
                     url: "/api/user/" + link.attr("data-user-id"),
                     method: "GET",
-                    success: function (data) {
+                    success: function(data) {
 
                         $("#UserId").val(data["Id"]);
 
@@ -200,10 +202,10 @@
 
                         $("#PhoneNumber").val(data["PhoneNumber"]);
                     },
-                    error:function() {
+                    error: function() {
                         alert("Something went wrong !");
                     }
-                
+
                 });
             });
 
@@ -244,7 +246,14 @@
                 $.ajax({
                     url: "/api/user",
                     method: "PUT",
-                    data: {UserId:Id,FirstName:FirstName,LastName:LastName,Email:Email,UserName:UserName,PhoneNumber:PhoneNumber} ,
+                    data: {
+                        UserId: Id,
+                        FirstName: FirstName,
+                        LastName: LastName,
+                        Email: Email,
+                        UserName: UserName,
+                        PhoneNumber: PhoneNumber
+                    },
                     success: function() {
 
                         bootbox.alert("Record Updated !");
@@ -272,6 +281,51 @@
 
             });
 
+            $("#btnSubmitRR").click(function() {
+
+                var RoleId = $("#RoleId").val();
+
+                var Id = $("#UserId").val();
+
+                bootbox.confirm({
+                    title: "Delete Role?",
+                    message: "Do you want to unassign the role to the user?",
+                    buttons: {
+                        cancel: {
+                            label: "<i class='ti-close'></i>Cancel"
+                        },
+                        confirm:{
+                            label: "<i class='ti-check'></i>Confirm"
+
+                    }
+                    },
+                    callback:function(result) {
+
+                        if (result) {
+
+                            $.ajax({
+                                url: "/api/user",
+                                method: "DELETE",
+                                data: { Id: Id, RoleName: RoleId },
+                                success: function() {
+
+                                    bootbox.alert("Role Removed");
+                                },
+
+                               error:function(e) {
+
+                                  
+                                       bootbox.alert(e.responseText);
+
+                                   
+                               } 
+
+
+                            });
+                        }
+                    }
+            });
+        });
 
         });
     </script>

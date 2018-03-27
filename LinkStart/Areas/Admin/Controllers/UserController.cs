@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -11,6 +12,7 @@ using LinkStart.Core.ViewModels;
 
 namespace LinkStart.Areas.Admin.Controllers
 {
+
     public class UserController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -20,12 +22,12 @@ namespace LinkStart.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
         // GET: Admin/User
-        public ActionResult Index()
+        public async Task<ActionResult > Index()
         {
             var model = new UserViewModel
             {
-                Users = _unitOfWork.UserRepository.GetUsers(),
-                RoleList =  _unitOfWork.RoleRepository.GetRoles().Select(
+                Users = await _unitOfWork.UserRepository.GetUsers(),
+                RoleList = (await _unitOfWork.RoleRepository.GetRoles()).Select(
                     x=>new SelectListItem
                     {
                         Value = x.Name,

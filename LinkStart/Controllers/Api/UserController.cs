@@ -43,11 +43,11 @@ namespace LinkStart.Controllers.Api
         }
 
         [HttpGet]
-        public IHttpActionResult GetUsers(string id)
+        public async Task<IHttpActionResult>  GetUsers(string id)
         {
             try
             {
-                var user = _unitOfWork.UserRepository.GetSingleUser(id);
+                var user = await _unitOfWork.UserRepository.GetSingleUser(id);
 
                 if (user == null)
                 {
@@ -67,7 +67,7 @@ namespace LinkStart.Controllers.Api
         }
 
         [HttpPut]
-        public IHttpActionResult Update([FromBody] UserViewModel model)
+        public async Task<IHttpActionResult>  Update([FromBody] UserViewModel model)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace LinkStart.Controllers.Api
 
                 _unitOfWork.UserRepository.Update(user);
 
-                _unitOfWork.Complete();
+              await _unitOfWork.Complete();
             }
             catch (Exception e)
             {
@@ -101,7 +101,6 @@ namespace LinkStart.Controllers.Api
         }
 
         [HttpPost]
-
         public async Task<IHttpActionResult> AssignRole([FromBody] RoleViewModel model)
         {
             try
@@ -122,6 +121,38 @@ namespace LinkStart.Controllers.Api
             return Ok();
 
         }
+
+        [HttpDelete]
+        public async Task<IHttpActionResult> RemoveUserRole([FromBody] RoleViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                 bool flag = await UserManager.IsInRoleAsync(model.Id, model.RoleName);
+
+                if (flag)
+                {
+                    await UserManager.RemoveFromRoleAsync(model.Id, model.RoleName);
+                }
+
+                else
+                {
+                    return BadRequest("selected role isnt assigned to the user");
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Opppss something went wrong {e.Message}");
+            }
+
+            return Ok();
+        }
+
+
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using LinkStart.Core.Repositories;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -23,9 +24,9 @@ namespace LinkStart.Persistence.Repositories
             _context.Entry(role).State = EntityState.Modified;
         }
 
-        public IEnumerable<IdentityRole> GetRoles() => _context.Roles.ToList();
+        public async Task<IEnumerable<IdentityRole>> GetRoles() => await _context.Roles.ToListAsync();
 
-        public IdentityRole GetSingleRole(string id) => _context.Roles.SingleOrDefault(x => x.Id == id);
+        public async Task<IdentityRole> GetSingleRole(string id) => await _context.Roles.SingleOrDefaultAsync(x => x.Id == id);
 
         public void Delete(IdentityRole role)
         {
