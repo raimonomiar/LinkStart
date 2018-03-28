@@ -20,16 +20,16 @@
                 <div class="main-login-form">
                     <div class="login-group">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Email, new { @class = "sr-only" })
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control",placeholder="Email" })
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-info" })
+                            @Html.LabelFor(m => m.Username, new { @class = "sr-only" })
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control",placeholder="Username" })
+                                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-info" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Password, new { @class = "sr-only" })
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control",placeholder="Password" })
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-info" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control",placeholder="Password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-info" })
                         </div>
-                     @*   <div class="form-group">
+                   @*     <div class="form-group">
                             @Html.CheckBoxFor(m => m.RememberMe,new{id="lg_rememeber"})
 
                             @Html.LabelFor(m => m.RememberMe)

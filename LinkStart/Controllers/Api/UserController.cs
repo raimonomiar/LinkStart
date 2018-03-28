@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace LinkStart.Controllers.Api
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class UserController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -311,6 +311,7 @@
     <Content Include="assets\js\chartist.min.js" />
     <Content Include="assets\js\jquery-1.10.2.js" />
     <Content Include="assets\js\paper-dashboard.js" />
+    <Content Include="Content\images\403.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -414,6 +415,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Account\Unauthorize.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
