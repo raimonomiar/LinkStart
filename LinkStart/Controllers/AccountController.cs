@@ -13,7 +13,7 @@ using Microsoft.Owin.Security;
 
 namespace LinkStart.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -396,7 +396,7 @@ namespace LinkStart.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

@@ -66,6 +66,7 @@ namespace LinkStart.Controllers.Api
 
         }
 
+        [Authorize(Roles = "User")]
         [HttpPut]
         public async Task<IHttpActionResult>  Update([FromBody] UserViewModel model)
         {
