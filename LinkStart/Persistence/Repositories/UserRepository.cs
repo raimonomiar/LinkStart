@@ -21,6 +21,8 @@ namespace LinkStart.Persistence.Repositories
         public async Task<User>  GetSingleUser(string id) =>  await  _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         public void Update(User user)
         {
+            _context.Users.Attach(user);
+
             _context.Entry(user).State = EntityState.Modified;
         }
     }
