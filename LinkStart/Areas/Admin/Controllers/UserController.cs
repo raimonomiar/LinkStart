@@ -12,7 +12,7 @@ using LinkStart.Core.ViewModels;
 
 namespace LinkStart.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "User")]
     public class UserController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

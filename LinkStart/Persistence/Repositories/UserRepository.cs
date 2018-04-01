@@ -23,7 +23,16 @@ namespace LinkStart.Persistence.Repositories
         {
             _context.Users.Attach(user);
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(user).Property(x => x.FirstName).IsModified = true;
+
+            _context.Entry(user).Property(x => x.LastName).IsModified = true;
+
+            _context.Entry(user).Property(x => x.PhoneNumber).IsModified = true;
+
+            _context.Entry(user).Property(x => x.Email).IsModified = true;
+
+            _context.Entry(user).Property(x=>x.UserName).IsModified=true;
+
         }
     }
 }
