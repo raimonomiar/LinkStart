@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace LinkStart.Controllers.Api
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UserController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -30,6 +30,7 @@ namespace LinkStart.Controllers.Api
         }
         public ApplicationUserManager UserManager => _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
+        [Authorize(Roles = "User")]
         [HttpGet]
         public async Task<IHttpActionResult>  GetUsers(string id)
         {
@@ -54,7 +55,8 @@ namespace LinkStart.Controllers.Api
 
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User")]
         [HttpPut]
         public async Task<IHttpActionResult>  Update([FromBody] UserViewModel model)
         {
@@ -91,6 +93,7 @@ namespace LinkStart.Controllers.Api
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IHttpActionResult> AssignRole([FromBody] RoleViewModel model)
         {
@@ -113,6 +116,7 @@ namespace LinkStart.Controllers.Api
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IHttpActionResult> RemoveUserRole([FromBody] RoleViewModel model)
         {

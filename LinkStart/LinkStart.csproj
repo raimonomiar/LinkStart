@@ -236,6 +236,7 @@
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\BlogController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\Post.cs" />
+    <Compile Include="Core\Repositories\IPostRepository.cs" />
     <Compile Include="Core\Repositories\IRoleRepository.cs" />
     <Compile Include="Core\Repositories\IUserRepository.cs" />
     <Compile Include="Core\ViewModels\AddPhoneNumberViewModel.cs" />
@@ -267,12 +269,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804021125056_Added Post.cs" />
-    <Compile Include="Migrations\201804021125056_Added Post.Designer.cs">
+    <Compile Include="Persistence\Migrations\201804021125056_Added Post.cs" />
+    <Compile Include="Persistence\Migrations\201804021125056_Added Post.Designer.cs">
       <DependentUpon>201804021125056_Added Post.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804021132216_AddedPost1.cs" />
-    <Compile Include="Migrations\201804021132216_AddedPost1.Designer.cs">
+    <Compile Include="Persistence\Migrations\201804021132216_AddedPost1.cs" />
+    <Compile Include="Persistence\Migrations\201804021132216_AddedPost1.Designer.cs">
       <DependentUpon>201804021132216_AddedPost1.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\201803041500491_Initial-Migration.cs" />
@@ -290,6 +292,7 @@
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Models\User.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repositories\PostRepository.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
     <Compile Include="Persistence\Repositories\RoleRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -426,11 +429,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Account\Unauthorize.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Views\Blog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -448,10 +451,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804021125056_Added Post.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201804021125056_Added Post.resx">
       <DependentUpon>201804021125056_Added Post.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804021132216_AddedPost1.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201804021132216_AddedPost1.resx">
       <DependentUpon>201804021132216_AddedPost1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201803041500491_Initial-Migration.resx">

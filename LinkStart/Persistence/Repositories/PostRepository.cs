@@ -1,7 +1,10 @@
 ﻿    using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+    using LinkStart.Core.Models;
     using LinkStart.Core.Repositories;
 
 namespace LinkStart.Persistence.Repositories
@@ -14,5 +17,13 @@ namespace LinkStart.Persistence.Repositories
         {
             _context = context;
         }
+
+        public void Add(Post post)
+        {
+            _context.Posts.Add(post);
+        }
+
+        public async Task<Post> GetSingleRole(int id) => await _context.Posts.SingleOrDefaultAsync(x=>x.Id == id);
+
     }
 }
