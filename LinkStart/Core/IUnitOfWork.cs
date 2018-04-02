@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using LinkStart.Core.Models;
 using LinkStart.Core.Repositories;
 
 namespace LinkStart.Core
