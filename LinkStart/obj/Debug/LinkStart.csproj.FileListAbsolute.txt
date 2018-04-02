@@ -389,3 +389,5 @@ D:\Ongoing Project\a\LinkStart\LinkStart\bin\System.Web.Http.Owin.dll
 D:\Ongoing Project\a\LinkStart\LinkStart\bin\System.Web.Http.Owin.xml
 E:\Ayush\LinkStart\LinkStart\bin\System.Web.Http.Owin.dll
 E:\Ayush\LinkStart\LinkStart\bin\System.Web.Http.Owin.xml
+E:\Ayush\LinkStart\LinkStart\obj\Debug\LinkStart.Persistence.Migrations.AddedPost.resources
+E:\Ayush\LinkStart\LinkStart\obj\Debug\LinkStart.Persistence.Migrations.AddedPost1.resources

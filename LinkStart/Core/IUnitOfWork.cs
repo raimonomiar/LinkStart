@@ -8,8 +8,9 @@ namespace LinkStart.Core
         IUserRepository UserRepository { get; }
 
         IRoleRepository RoleRepository { get; }
-/*
-        IUserRoleRepository UserRoleRepository { get}*/
+
+        IPostRepository PostRepository { get; }
+        /*IUserRoleRepository UserRoleRepository { get}*/
         Task Complete();
 
     }
