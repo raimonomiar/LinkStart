@@ -16,7 +16,7 @@ namespace LinkStart.Controllers.Api
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        private ApplicationUserManager _userManager;
+        private readonly ApplicationUserManager _userManager;
 
         public UserController(IUnitOfWork unitOfWork)
         {
@@ -54,7 +54,7 @@ namespace LinkStart.Controllers.Api
 
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User,Admin")]
         [HttpPut]
         public async Task<IHttpActionResult>  Update([FromBody] UserViewModel model)
         {
@@ -65,15 +65,17 @@ namespace LinkStart.Controllers.Api
                     return BadRequest();
                 }
 
-                var user = new User
-                {
-                    Id = model.UserId,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
-                    UserName = model.UserName,
-                    PhoneNumber = model.PhoneNumber
-                };
+                var user = await _unitOfWork.UserRepository.GetSingleUser(model.UserId);
+
+                user.FirstName = model.FirstName;
+
+                user.LastName = model.LastName;
+
+                user.UserName = model.UserName;
+
+                user.PhoneNumber = model.PhoneNumber ?? user.PhoneNumber;
+
+                user.Email = model.Email;
 
                 _unitOfWork.UserRepository.Update(user);
 
