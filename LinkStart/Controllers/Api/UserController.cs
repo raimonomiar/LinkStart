@@ -66,7 +66,7 @@ namespace LinkStart.Controllers.Api
 
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User,Admin")]
         [HttpPut]
         public async Task<IHttpActionResult>  Update([FromBody] UserViewModel model)
         {
@@ -79,7 +79,7 @@ namespace LinkStart.Controllers.Api
 
                 var user = new User
                 {
-                    Id = model.UserId,
+                   
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
