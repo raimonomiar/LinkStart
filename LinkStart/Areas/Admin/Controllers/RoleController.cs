@@ -18,7 +18,7 @@ namespace LinkStart.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
         // GET: Admin/Role
-        public async Task<ActionResult > Index()
+        public async Task<ActionResult> Index()
         {
             var model = new RoleViewModel
             {

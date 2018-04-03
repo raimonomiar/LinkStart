@@ -14,6 +14,8 @@ namespace LinkStart.App_Start
         public MappingProfile()
         {
             CreateMap<User, UserDto>();
+
+            CreateMap<Post, PostDto>();
         }
 
     }
