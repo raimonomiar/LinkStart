@@ -22,7 +22,7 @@ namespace LinkStart.Controllers
         {
             var blogViewModel = new PostViewModel
             {
-                PostList = await _unitOfWork.PostRepository.GetPostList()
+                Posts= await _unitOfWork.PostRepository.GetPostList()
             };
 
             return View(blogViewModel);
