@@ -9,6 +9,7 @@ using AutoMapper;
 using LinkStart.Core;
 using LinkStart.Core.Dtos;
 using LinkStart.Core.Models;
+using Microsoft.AspNet.Identity;
 
 namespace LinkStart.Controllers.Api
 {
@@ -43,8 +44,12 @@ namespace LinkStart.Controllers.Api
             {
                 return BadRequest("Please Fill in the required fields");
             }
+            postModelDto.PosteDateTime = DateTime.Now;
+
+            postModelDto.UserId = User.Identity.GetUserId();
 
             var post = Mapper.Map<PostDto, Post>(postModelDto);
+            
 
             _unitOfWork.PostRepository.Add(post);
 

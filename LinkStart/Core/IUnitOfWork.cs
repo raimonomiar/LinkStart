@@ -11,6 +11,7 @@ namespace LinkStart.Core
         IRoleRepository RoleRepository { get; }
 
         IPostRepository PostRepository { get; }
+
         /*IUserRoleRepository UserRoleRepository { get}*/
         Task Complete();
 

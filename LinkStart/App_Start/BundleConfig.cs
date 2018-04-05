@@ -12,7 +12,8 @@ namespace LinkStart
                         "~/Scripts/jquery-{version}.js",
                         "~/assets/js/chartist.min.js",
                         "~/assets/js/paper-dashboard.js",
-                        "~/Scripts/bootbox.min.js"
+                        "~/Scripts/bootbox.min.js",
+                        "~/Scripts/jquery.timeago.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

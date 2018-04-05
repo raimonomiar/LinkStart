@@ -1,4 +1,5 @@
-﻿@model LinkStart.Core.ViewModels.PostViewModel
+﻿@using Microsoft.AspNet.Identity
+@model LinkStart.Core.ViewModels.PostViewModel
 @{
 }
 
@@ -50,87 +51,87 @@
         width: 100%;
     }
 
-        .status-upload form {
-            float: left;
-            width: 100%;
-        }
+    .status-upload form {
+        float: left;
+        width: 100%;
+    }
 
-            .status-upload form textarea {
-                background: none repeat scroll 0 0 #fff;
-                border: medium none;
-                -webkit-border-radius: 4px 4px 0 0;
-                -moz-border-radius: 4px 4px 0 0;
-                -ms-border-radius: 4px 4px 0 0;
-                -o-border-radius: 4px 4px 0 0;
-                border-radius: 4px 4px 0 0;
-                color: #777777;
-                float: left;
-                font-family: Lato;
-                font-size: 14px;
-                height: 142px;
-                letter-spacing: 0.3px;
-                padding: 20px;
-                width: 100%;
-                resize: vertical;
-                outline: none;
-                border: 1px solid #F2F2F2;
-            }
+    .status-upload form textarea {
+        background: none repeat scroll 0 0 #fff;
+        border: medium none;
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        -ms-border-radius: 4px 4px 0 0;
+        -o-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
+        color: #777777;
+        float: left;
+        font-family: Lato;
+        font-size: 14px;
+        height: 142px;
+        letter-spacing: 0.3px;
+        padding: 20px;
+        width: 100%;
+        resize: vertical;
+        outline: none;
+        border: 1px solid #F2F2F2;
+    }
 
-        .status-upload ul {
-            float: left;
-            list-style: none outside none;
-            margin: 0;
-            padding: 0 0 0 15px;
-            width: auto;
-        }
+    .status-upload ul {
+        float: left;
+        list-style: none outside none;
+        margin: 0;
+        padding: 0 0 0 15px;
+        width: auto;
+    }
 
-            .status-upload ul > li {
-                float: left;
-            }
+    .status-upload ul > li {
+        float: left;
+    }
 
-                .status-upload ul > li > a {
-                    -webkit-border-radius: 4px;
-                    -moz-border-radius: 4px;
-                    -ms-border-radius: 4px;
-                    -o-border-radius: 4px;
-                    border-radius: 4px;
-                    color: #777777;
-                    float: left;
-                    font-size: 14px;
-                    height: 30px;
-                    line-height: 30px;
-                    margin: 10px 0 10px 10px;
-                    text-align: center;
-                    -webkit-transition: all 0.4s ease 0s;
-                    -moz-transition: all 0.4s ease 0s;
-                    -ms-transition: all 0.4s ease 0s;
-                    -o-transition: all 0.4s ease 0s;
-                    transition: all 0.4s ease 0s;
-                    width: 30px;
-                    cursor: pointer;
-                }
+    .status-upload ul > li > a {
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        color: #777777;
+        float: left;
+        font-size: 14px;
+        height: 30px;
+        line-height: 30px;
+        margin: 10px 0 10px 10px;
+        text-align: center;
+        -webkit-transition: all 0.4s ease 0s;
+        -moz-transition: all 0.4s ease 0s;
+        -ms-transition: all 0.4s ease 0s;
+        -o-transition: all 0.4s ease 0s;
+        transition: all 0.4s ease 0s;
+        width: 30px;
+        cursor: pointer;
+    }
 
-                    .status-upload ul > li > a:hover {
-                        background: none repeat scroll 0 0 #606060;
-                        color: #fff;
-                    }
+    .status-upload ul > li > a:hover {
+        background: none repeat scroll 0 0 #606060;
+        color: #fff;
+    }
 
-        .status-upload form button {
-            border: medium none;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            -o-border-radius: 4px;
-            border-radius: 4px;
-            color:#808080;
-            float: right;
-            font-family: Lato;
-            font-size: 14px;
-            letter-spacing: 0.3px;
-            margin-right: 9px;
-            margin-top: 9px;
-            padding: 6px 15px;
-        }
+    .status-upload form button {
+        border: medium none;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        color:#808080;
+        float: right;
+        font-family: Lato;
+        font-size: 14px;
+        letter-spacing: 0.3px;
+        margin-right: 9px;
+        margin-top: 9px;
+        padding: 6px 15px;
+    }
 
     .dropdown > a > span.green:before {
         border-left-color: #2dcb73;
@@ -139,28 +140,111 @@
     .status-upload form button > i {
         margin-right: 7px;
     }
-
+    .thumbnail {
+        padding:0px;
+    }
+    .panel {
+        position:relative;
+    }
+    .panel>.panel-heading:after,.panel>.panel-heading:before{
+        position:absolute;
+        top:11px;left:-16px;
+        right:100%;
+        width:0;
+        height:0;
+        display:block;
+        content:" ";
+        border-color:transparent;
+        border-style:solid solid outset;
+        pointer-events:none;
+    }
+    .panel>.panel-heading:after{
+        border-width:7px;
+        border-right-color:#f7f7f7;
+        margin-top:1px;
+        margin-left:2px;
+    }
+    .panel>.panel-heading:before{
+        border-right-color:#ddd;
+        border-width:8px;
+    }   
 
 </style>
+
 <div class="row">
-    <div class="col-lg-6 col-md-7">
-        
+    <div class="col-md-6">
         <div class="card">
             <div class="widget-area no-padding blank">
                 <div class="status-upload">
-                   @using (Html.BeginForm())
-                   {
-                       <textarea placeholder="What are you doing right now?" ></textarea>
-                       <ul>
-                           <li><a title="Audio" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-                           <li><a title="Video" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-                           <li><a title="Sound Record" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
-                           <li><a title="Picture" data-toggle="tooltip" data-placement="bottom" data-original-title=""><i class="fa fa-picture-o"></i></a></li>
-                       </ul>
-                       <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-                   }
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.TextAreaFor(x=>x.Text,new{placeholder= "What are you doing right now?" })
+                        <ul>
+                            <li><a title="Audio" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
+                            <li><a title="Video" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
+                            <li><a title="Sound Record" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
+                            <li><a title="Picture" data-toggle="tooltip" data-placement="bottom" data-original-title=""><i class="fa fa-picture-o"></i></a></li>
+                        </ul>
+                        <button type="button" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+                    }
                 </div><!-- Status Upload  -->
             </div>
         </div>
+      
+
+        
     </div>
+
+ 
 </div>
+
+@foreach (var item in Model.Posts)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="widget-area no-padding blank">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>@item.User.UserName</strong> <span class="text-muted"><time class="timeago" datetime="@item.PosteDateTime"></time></span>
+                        </div>
+                        <div class="panel-body">
+                            @item.Text
+                        </div><!-- /panel-body -->
+                    </div><!-- /panel panel-default -->
+                </div><!-- /col-sm-5 -->
+            </div>
+        </div>
+    </div>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function() {
+
+            $("time.timeago").timeago();
+
+            $(".green").click(function() {
+                var text = $("#Text").val();
+                $.ajax({
+
+                    url: "/api/Blog",
+                    method: "POST",
+                    data: { Text:text}
+                    
+                })
+                    .done(function() {
+
+                        bootbox.alert("Posted!!");
+                    })
+                    .fail(function() {
+
+                        bootbox.alert("Something Went wrong!!");
+                    });
+            });
+        });
+    </script>
+}
