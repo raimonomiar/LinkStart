@@ -11,7 +11,10 @@ namespace LinkStart.Core.Repositories
     {
         void Add(Post post);
 
-        Task<Post> GetSingleRole(int id);
+        Task<Post> GetSinglePost(int id);
 
+        int GetId(Post post);
+
+        Task<IEnumerable<Post>> GetPostList();
     }
 }
