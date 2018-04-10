@@ -23,10 +23,11 @@ namespace LinkStart.Persistence.Repositories
             _context.Posts.Add(post);
         }
 
-        public async Task<Post> GetSinglePost(int id) => await _context.Posts.SingleOrDefaultAsync(x=>x.Id == id);
+        public async Task<Post> GetSinglePost(int id) => await _context.Posts.Include(x=>x.User).SingleOrDefaultAsync(x=>x.Id == id);
 
         public int GetId(Post post) => post.Id;
 
-        public async Task<IEnumerable<Post>> GetPostList() => await _context.Posts.ToListAsync();
+        public async Task<IEnumerable<Post>> GetPostList() =>
+            await _context.Posts.Include(u => u.User).OrderBy(x => x.PosteDateTime).ToListAsync();
     }
 }

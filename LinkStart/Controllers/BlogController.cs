@@ -9,6 +9,7 @@ using LinkStart.Core.ViewModels;
 
 namespace LinkStart.Controllers
 {
+    [Authorize]
     public class BlogController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -15,6 +15,8 @@ namespace LinkStart.App_Start
         {
             CreateMap<User, UserDto>();
 
+            CreateMap<PostDto, Post>();
+
             CreateMap<Post, PostDto>();
         }
 

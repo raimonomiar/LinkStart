@@ -199,6 +199,23 @@
  
 </div>
 
+<div class="row" id="post" style="display: none">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="widget-area no-padding blank">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>@Html.DisplayFor(x=>x.Username)</strong> <span class="text-muted"><time class="timeago" datetime="@Html.DisplayFor(x=>x.PosteDateTime)"></time></span>
+                    </div>
+                    <div class="panel-body">
+                        @Html.DisplayFor(x=>x.Text)
+                    </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+            </div><!-- /col-sm-5 -->
+        </div>
+    </div>
+</div>
+
 @foreach (var item in Model.Posts)
 {
     <div class="row">
@@ -236,9 +253,25 @@
                     data: { Text:text}
                     
                 })
-                    .done(function() {
+                    .done(function(id) {
 
-                        bootbox.alert("Posted!!");
+
+                        $.ajax({
+                                url: "/api/Blog/" + id,
+                                method: "GET"
+
+                            })
+                            .done(function(data) {
+
+                                $("#post").fadeIn("slow");
+
+                                $("#Username").val(data["User"]);
+
+                                $("#PosteDateTime").val(data["PosteDateTime"]);
+
+
+
+                            });
                     })
                     .fail(function() {
 
