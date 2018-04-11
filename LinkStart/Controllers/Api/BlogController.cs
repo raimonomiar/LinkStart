@@ -30,9 +30,11 @@ namespace LinkStart.Controllers.Api
                 return BadRequest("Record Not Found");
             }
 
-          
+            var singlePost = Mapper.Map<Post, PostDto>(post);
 
-            return Ok(post);
+            
+
+            return Ok(singlePost);
         }
 
         [HttpPost]
@@ -46,7 +48,7 @@ namespace LinkStart.Controllers.Api
 
             postModelDto.UserId = User.Identity.GetUserId();
 
-            var post = Mapper.Map<PostDto, Post>(postModelDto);
+            var post = Mapper.Map<PostDto,Post>(postModelDto);
             
 
             _unitOfWork.PostRepository.Add(post);

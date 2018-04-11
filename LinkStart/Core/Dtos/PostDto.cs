@@ -11,6 +11,7 @@ namespace LinkStart.Core.Dtos
 
         public string Text { get; set; }
 
+        public UserDto User { get; set; }
         public DateTime PosteDateTime { get; set; }
     }
 }
