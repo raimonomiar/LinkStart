@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+@using PagedList;
+@using PagedList.Mvc;
 @model LinkStart.Core.ViewModels.PostViewModel
 @{
 }
@@ -169,6 +171,9 @@
         border-width:8px;
     }   
 
+    li {
+        list-style: none;
+    }
 </style>
 
 <div class="row">
@@ -216,29 +221,32 @@
     </div>
 </div>
 
-@foreach (var item in Model.Posts)
-{
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="widget-area no-padding blank">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong>@item.User.UserName</strong> <span class="text-muted"><time class="timeago" datetime="@item.PosteDateTime"></time></span>
-                        </div>
-                        <div class="panel-body">
-                            @item.Text
-                        </div><!-- /panel-body -->
-                    </div><!-- /panel panel-default -->
-                </div><!-- /col-sm-5 -->
+<ul data-bind="foreach: blogs">
+    <li> <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="widget-area no-padding blank">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong data-bind="text:userName"></strong> <span class="text-muted"><time class="timeago" data-bind="value:dateTime"></time></span>
+                            </div>
+                            <div class="panel-body">
+                                <span data-bind="text:text"></span>
+                            </div><!-- /panel-body -->
+                        </div><!-- /panel panel-default -->
+                    </div><!-- /col-sm-5 -->
+                </div>
             </div>
         </div>
-    </div>
-}
+    </li>
+</ul>
+    
+@Html.PagedListPager( Model.Posts,page=> Url.Action("Index",new{page}))
+
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
-
+@*
     <script type="text/javascript">
         $(function() {
 
@@ -248,20 +256,20 @@
                 var text = $("#Text").val();
                 $.ajax({
 
-                    url: "/api/Blog",
-                    method: "POST",
-                    data: { Text:text}
+                        url: "/api/Blog",
+                        method: "POST",
+                        data: { Text:text}
                     
-                })
+                    })
                     .done(function(id) {
 
 
                         $.ajax({
-                            url: "/api/Blog/" + id,
-                            method: "GET"
+                                url: "/api/Blog/" + id,
+                                method: "GET"
 
 
-                        })
+                            })
                             .done(function (data) {
 
                                 $("#Text").val('');
@@ -293,5 +301,48 @@
             });
 
         });
+    </script>*@
+    <script type="text/javascript">
+
+        function Blog(data) {
+
+            this.userName = ko.observable(data.User.UserName);
+            this.text = ko.observable(data.Text);
+            this.dateTime = ko.observable(data.PosteDateTime);
+
+        } 
+
+        function BlogViewModel() {
+
+            $("time.timeago").timeago();
+
+            var self = this;
+
+            self.blogs = ko.observableArray([]);
+
+            self.newTaskDetail = ko.observable();
+            $.ajax({
+                    url: "/api/Blog",
+                    method: "GET"
+                })
+                .done(function(datas) {
+
+                    var mappedTasks = $.map(datas,
+                        function(data) {
+
+                            return new Blog(data);
+                        });
+                    self.blogs(mappedTasks);
+
+                });
+
+
+        };
+
+        ko.applyBindings(new BlogViewModel());
+
+        
+
+
     </script>
 }

@@ -6,7 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using LinkStart.Core;
 using LinkStart.Core.ViewModels;
-
+using PagedList;
+using PagedList.Mvc;
 namespace LinkStart.Controllers
 {
     [Authorize]
@@ -19,11 +20,11 @@ namespace LinkStart.Controllers
             _unitOfWork = unitOfWork;
         }
         // GET: Blog
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
             var blogViewModel = new PostViewModel
             {
-                Posts= await _unitOfWork.PostRepository.GetPostList()
+                Posts= (await _unitOfWork.PostRepository.GetPostList()).ToPagedList(page ?? 1,5)
             };
 
             return View(blogViewModel);
