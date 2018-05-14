@@ -11,6 +11,7 @@ namespace LinkStart.Core.Repositories
     {
         void Add(Post post);
 
+        void Remove(Post post);
         Task<Post> GetSinglePost(int id);
 
         int GetId(Post post);

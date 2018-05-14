@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using LinkStart.Core.Models;
-using PagedList;
 
 namespace LinkStart.Core.ViewModels
 {
@@ -20,6 +19,6 @@ namespace LinkStart.Core.ViewModels
 
         public DateTime PosteDateTime { get; set; }
 
-        public IPagedList<Post>  Posts { get; set; }
+        public Post  Posts { get; set; }
     }
 }

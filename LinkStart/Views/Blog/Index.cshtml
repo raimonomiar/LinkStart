@@ -184,7 +184,7 @@
                     <form data-bind="submit:addPost">
                         
                         @Html.AntiForgeryToken()
-                        <textarea placeholder = "What are you doing right now?" id="text" data-bind="value:newText"></textarea>
+                        <textarea placeholder = "What are you doing right now?" id="text" data-bind="value:newText" required="required"></textarea>
                         <ul>
                             <li><a title="Audio" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
                             <li><a title="Video" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
@@ -203,15 +203,17 @@
 
  
 </div>
-
-<ul data-bind="foreach: blogs">
-    <li>  <div class="row" >
+  <div class="row" data-bind="foreach: blogs,fadeVisible:blogs">
             <div class="col-md-8">
                 <div class="card">
                     <div class="widget-area no-padding blank">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <strong data-bind="text:userName"></strong> <span class="text-muted"><div class="timeago"  data-bind="timeago:dateTime"  ></div></span>
+                                <input type="hidden" databind="value:postId" />
+                                <strong data-bind="text:userName"></strong>
+                                <span class="pull-right"><a href="#" data-bind="click:$parent.removePost"><i class="ti ti-close" ></i></a></span>
+                                <span class="text-muted">
+                                    <div class="timeago" data-bind="timeago:dateTime"></div></span>
                             </div>
                             <div class="panel-body">
                                 <span data-bind="text:text"></span>
@@ -221,8 +223,6 @@
                 </div>
             </div>
         </div>
-    </li>
-</ul>
    
 @*@Html.PagedListPager( Model.Posts,page=> Url.Action("Index",new{page}))*@
 
@@ -292,6 +292,7 @@
             this.userName = ko.observable(data.User["UserName"]);
             this.text = ko.observable(data.Text);
             this.dateTime = ko.observable(data.PosteDateTime);
+            this.postId = ko.observable(data.Id);
 
         } 
 
@@ -305,9 +306,9 @@
 
             self.newText = ko.observable();
 
-            self.newDateTime = ko.observable();
+            self.displayAdvancedOptions = ko.observable(false);
 
-            self.newUsername = ko.observable();
+
 
             $.ajax({
                     url: "/api/Blog",
@@ -330,20 +331,45 @@
                 $.ajax({
                         url: "/api/Blog",
                         method: "POST",
-                        data:{Text: $('#text').val()}
+                        data:{Text: self.newText()}
 
                     })
                     .done(function(post) {
 
-                        
+                        self.blogs.unshift(new Blog(post));
 
-                        self.blogs.push(new Blog(post));
-
+                        self.displayAdvancedOptions(true);
                         self.newText("");
                     });
             };
 
+            self.removePost = function(post) {
 
+                $.ajax({
+                        url: "/api/Blog/" + post.postId(),
+                        method: 'DELETE',
+
+                    })
+                    .done(function() {
+
+                        self.blogs.remove(post);
+                    });
+            }
+
+
+        };
+
+        ko.bindingHandlers.fadeVisible = {
+            init: function(element, valueAccessor) {
+                // Initially set the element to be instantly visible/hidden depending on the value
+                var value = valueAccessor();
+                $(element).toggle(ko.unwrap(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
+            },
+            update: function(element, valueAccessor) {
+                // Whenever the value subsequently changes, slowly fade the element in or out
+                var value = valueAccessor();
+                ko.unwrap(value) ? $(element).fadeIn() : $(element).fadeOut();
+            }
         };
 
         ko.applyBindings(new BlogViewModel());

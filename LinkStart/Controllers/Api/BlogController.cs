@@ -78,5 +78,22 @@ namespace LinkStart.Controllers.Api
 
             return Ok(postDto);
         }
+
+        [HttpDelete]
+        public async Task<IHttpActionResult> RemovePost(int id)
+        {
+            if (id ==0)
+            {
+                return BadRequest("invalid id");
+            }
+
+            var post = await _unitOfWork.PostRepository.GetSinglePost(id);
+
+            _unitOfWork.PostRepository.Remove(post);
+
+            await _unitOfWork.Complete();
+
+            return Ok();
+        }
     }
 }
