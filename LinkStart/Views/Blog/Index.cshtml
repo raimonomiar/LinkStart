@@ -181,18 +181,18 @@
         <div class="card">
             <div class="widget-area no-padding blank">
                 <div class="status-upload">
-                    @using (Html.BeginForm())
-                    {
+                    <form data-bind="submit:addPost">
+                        
                         @Html.AntiForgeryToken()
-                        @Html.TextAreaFor(x=>x.Text,new{placeholder= "What are you doing right now?" })
+                        <textarea placeholder = "What are you doing right now?" id="text" data-bind="value:newText"></textarea>
                         <ul>
                             <li><a title="Audio" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
                             <li><a title="Video" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
                             <li><a title="Sound Record" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
                             <li><a title="Picture" data-toggle="tooltip" data-placement="bottom" data-original-title=""><i class="fa fa-picture-o"></i></a></li>
                         </ul>
-                        <button type="button" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-                    }
+                        <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+                    </form>
                 </div><!-- Status Upload  -->
             </div>
         </div>
@@ -204,31 +204,14 @@
  
 </div>
 
-<div class="row" id="post" style="display: none" >
-    <div class="col-md-8">
-        <div class="card">
-            <div class="widget-area no-padding blank">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong><span id="Username"></span></strong><span class="text-muted"><time class="timeago" id="datetime" datetime="@DateTime.Now"></time></span>
-</div>  
-                    <div class="panel-body">
-                        <span id="Text1"></span>
-                    </div><!-- /panel-body -->
-                </div><!-- /panel panel-default -->
-            </div><!-- /col-sm-5 -->
-        </div>
-    </div>
-</div>
-
 <ul data-bind="foreach: blogs">
-    <li> <div class="row">
+    <li>  <div class="row" >
             <div class="col-md-8">
                 <div class="card">
                     <div class="widget-area no-padding blank">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <strong data-bind="text:userName"></strong> <span class="text-muted"><time class="timeago" data-bind="value:dateTime"></time></span>
+                                <strong data-bind="text:userName"></strong> <span class="text-muted"><div class="timeago"  data-bind="timeago:dateTime"  ></div></span>
                             </div>
                             <div class="panel-body">
                                 <span data-bind="text:text"></span>
@@ -240,8 +223,8 @@
         </div>
     </li>
 </ul>
-    
-@Html.PagedListPager( Model.Posts,page=> Url.Action("Index",new{page}))
+   
+@*@Html.PagedListPager( Model.Posts,page=> Url.Action("Index",new{page}))*@
 
 @section scripts
 {
@@ -306,7 +289,7 @@
 
         function Blog(data) {
 
-            this.userName = ko.observable(data.User.UserName);
+            this.userName = ko.observable(data.User["UserName"]);
             this.text = ko.observable(data.Text);
             this.dateTime = ko.observable(data.PosteDateTime);
 
@@ -314,13 +297,18 @@
 
         function BlogViewModel() {
 
-            $("time.timeago").timeago();
+          
 
             var self = this;
 
             self.blogs = ko.observableArray([]);
 
-            self.newTaskDetail = ko.observable();
+            self.newText = ko.observable();
+
+            self.newDateTime = ko.observable();
+
+            self.newUsername = ko.observable();
+
             $.ajax({
                     url: "/api/Blog",
                     method: "GET"
@@ -334,7 +322,26 @@
                         });
                     self.blogs(mappedTasks);
 
+            
                 });
+
+            self.addPost = function() {
+
+                $.ajax({
+                        url: "/api/Blog",
+                        method: "POST",
+                        data:{Text: $('#text').val()}
+
+                    })
+                    .done(function(post) {
+
+                        
+
+                        self.blogs.push(new Blog(post));
+
+                        self.newText("");
+                    });
+            };
 
 
         };

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
@@ -19,7 +21,7 @@ namespace LinkStart.Controllers.Api
             _unitOfWork = unitOfWork;
         }
 
-
+/*
         [HttpGet]
         public async Task<IHttpActionResult> GetPost(int id)
         {
@@ -35,6 +37,21 @@ namespace LinkStart.Controllers.Api
             
 
             return Ok(singlePost);
+        }*/
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetPosts()
+        {
+            var posts = await _unitOfWork.PostRepository.GetPostList();
+
+            if (posts==null)
+            {
+                return BadRequest("Records not found");
+            }
+
+            var postDtoList = Mapper.Map<IEnumerable<Post>, IEnumerable<PostDto>>(posts);
+
+            return Ok(postDtoList);
         }
 
         [HttpPost]
@@ -52,12 +69,14 @@ namespace LinkStart.Controllers.Api
             
 
             _unitOfWork.PostRepository.Add(post);
-
+                
             await _unitOfWork.Complete();
 
-            var id = _unitOfWork.PostRepository.GetId(post);
+            post = await _unitOfWork.PostRepository.GetSinglePost(post.Id);
 
-            return Ok(id);
+            var postDto = Mapper.Map<Post, PostDto>(post);
+
+            return Ok(postDto);
         }
     }
 }
