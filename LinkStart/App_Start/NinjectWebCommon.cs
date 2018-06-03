@@ -64,6 +64,8 @@ namespace LinkStart
             kernel.Bind<IUserRepository>().To<UserRepository>();
 
             kernel.Bind<IPostRepository>().To<PostRepository>();
+
+            kernel.Bind<IConnectionRepository>().To<ConnectionRepository>();
         }
     }
 }

@@ -9,12 +9,23 @@ namespace LinkStart
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-2.1.4.min.js",
                         "~/assets/js/chartist.min.js",
                         "~/assets/js/paper-dashboard.js",
                         "~/Scripts/bootbox.min.js",
-                        "~/Scripts/jquery.timeago.js"
+                        "~/Scripts/jquery.timeago.js",
+                        "~/Scripts/knockout-3.4.2.js",
+                        "~/Scripts/knockout.mapping-latest.js"
+         
+           
+   
+                        
+
                         ));
+
+            bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
+                        "~/Scripts/app.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

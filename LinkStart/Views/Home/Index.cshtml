@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@model LinkStart.Core.ViewModels.UserViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 <div class="row">
@@ -10,9 +12,10 @@
             <div class="content">
                 <div class="author">
                     <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..." />
-                    <h4 class="title">
-                        Chet Faker<br />
-                        <a href="#"><small>@@chetfaker</small></a>
+                    <input type="hidden" value="@User.Identity.GetUserId()" id="Id" />
+                    <h4 class="title" data-bind="text:userName">
+                         <br />
+                        <a href="#"><small data-bind="text:userName">@@</small></a>
                     </h4>
                 </div>
                 <p class="description text-center">
@@ -103,24 +106,21 @@
                 <h4 class="title">Edit Profile</h4>
             </div>
             <div class="content">
-                <form>
+                <form data-bind="submit:updateUser">
                     <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label>Company</label>
-                                <input type="text" class="form-control border-input" disabled placeholder="Company" value="Creative Code Inc.">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
+
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" class="form-control border-input" placeholder="Username" value="michael23">
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control border-input", placeholder = "Username",data_bind="value:userName" })
+                                @Html.ValidationMessageFor(x => x.UserName)
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control border-input" placeholder="Email">
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control border-input", placeholder = "Email",data_bind="value:email" })
+                                @Html.ValidationMessageFor(x => x.Email)
                             </div>
                         </div>
                     </div>
@@ -128,55 +128,31 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>First Name</label>
-                                <input type="text" class="form-control border-input" placeholder="Company" value="Chet">
+                                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control border-input", placeholder = "First Name",data_bind="value:firstName" })
+                                @Html.ValidationMessageFor(x => x.FirstName)
+
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input type="text" class="form-control border-input" placeholder="Last Name" value="Faker">
+                                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control border-input", placeholder = "LastName",data_bind="value:lastName" })
+                                @Html.ValidationMessageFor(x => x.LastName)
+
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Address</label>
-                                <input type="text" class="form-control border-input" placeholder="Home Address" value="Melbourne, Australia">
+                                <label>Phone Number</label>
+                                @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control border-input", placeholder = "Phone Number",data_bind="value:phoneNumber" })
+                                @Html.ValidationMessageFor(x => x.PhoneNumber)
+
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>City</label>
-                                <input type="text" class="form-control border-input" placeholder="City" value="Melbourne">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <input type="text" class="form-control border-input" placeholder="Country" value="Australia">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Postal Code</label>
-                                <input type="number" class="form-control border-input" placeholder="ZIP Code">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>About Me</label>
-                                <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" value="Mike">Oh so, your weak rhyme
-You doubt I'll bother, reading into it
-I'll probably won't, left to my own devices
-But that's the difference in our opinions.</textarea>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="text-center">
                         <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
                     </div>
@@ -187,3 +163,73 @@ But that's the difference in our opinions.</textarea>
     </div>
 
 </div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script type="text/javascript">
+
+    
+
+        function UserViewModel() {
+
+            var self = this;
+
+
+            self.id = ko.observable();
+
+            self.firstName = ko.observable();
+
+            self.lastName = ko.observable();
+
+            self.userName = ko.observable();
+
+            self.email = ko.observable();
+
+            self.phoneNumber = ko.observable();
+
+            $.ajax({
+                    url: "/api/user/" + $("#Id").val(),
+                    method: "GET"
+                })
+                .done(function(data) {
+
+                    self.id(data.Id);
+
+                    self.firstName(data.FirstName);
+
+                    self.lastName(data.LastName);
+
+                    self.userName(data.UserName);
+
+                    self.email(data.Email);
+
+                    self.phoneNumber(data.PhoneNumber);
+                });
+
+            self.updateUser = function() {
+
+                $.ajax({
+                        url: "/api/user",
+                        method: "PUT",
+                        data: {
+                            UserId: self.id(),
+                            Email: self.email(),
+                            FirstName: self.firstName(),
+                            LastName: self.lastName(),
+                            UserName: self.userName(),
+                            PhoneNumber: self.phoneNumber
+                        }
+
+                    })
+                    .done(function() {
+                        bootbox.alert("User updated");
+                    });
+            }
+
+
+        }
+        ko.applyBindings(new UserViewModel());
+
+    </script>
+}

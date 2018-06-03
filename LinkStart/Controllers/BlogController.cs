@@ -19,7 +19,7 @@ namespace LinkStart.Controllers
             _unitOfWork = unitOfWork;
         }
         // GET: Blog
-        public ActionResult Index(int? page)
+        public ActionResult Index()
         {
           /*  var blogViewModel = new PostViewModel
             {

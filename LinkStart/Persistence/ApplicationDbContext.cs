@@ -8,6 +8,7 @@ namespace LinkStart.Persistence
     {
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<Connection> Connections { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 

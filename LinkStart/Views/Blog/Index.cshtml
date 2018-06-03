@@ -1,9 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@using PagedList;
-@using PagedList.Mvc;
-@model LinkStart.Core.ViewModels.PostViewModel
-@{
-}
+﻿
 
 <style>
     body {
@@ -183,7 +178,6 @@
                 <div class="status-upload">
                     <form data-bind="submit:addPost">
                         
-                        @Html.AntiForgeryToken()
                         <textarea placeholder = "What are you doing right now?" id="text" data-bind="value:newText" required="required"></textarea>
                         <ul>
                             <li><a title="Audio" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
@@ -211,7 +205,11 @@
                             <div class="panel-heading">
                                 <input type="hidden" databind="value:postId" />
                                 <strong data-bind="text:userName"></strong>
-                                <span class="pull-right"><a href="#" data-bind="click:$parent.removePost"><i class="ti ti-close" ></i></a></span>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                 
+                                    <span class="pull-right"><a href="#" data-bind="click:$parent.removePost"><i class="ti ti-close" ></i></a></span>   
+                                }
                                 <span class="text-muted">
                                     <div class="timeago" data-bind="timeago:dateTime"></div></span>
                             </div>
@@ -228,7 +226,6 @@
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/jqueryval")
 @*
     <script type="text/javascript">
         $(function() {

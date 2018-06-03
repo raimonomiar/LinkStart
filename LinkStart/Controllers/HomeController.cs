@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LinkStart.Core.ViewModels;
 
 namespace LinkStart.Controllers
 {
-    [Authorize(Roles = "User")]
+    [Authorize]
     public class HomeController : Controller
     {
+
+
+
         public ActionResult Index()
         {
-            return View();
+            var model = new UserViewModel();
+
+
+            return View(model);
         }
 
         public ActionResult About()

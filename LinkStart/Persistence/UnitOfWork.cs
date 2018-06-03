@@ -21,15 +21,22 @@ namespace LinkStart.Persistence
             UserRepository = new UserRepository(context);
 
             PostRepository = new PostRepository(context);
+            ConnectionRepository = new ConnectionRepository(context);
         }
 
         public IRoleRepository RoleRepository { get; private set; }
         public IPostRepository PostRepository { get; private set; }
+        public IConnectionRepository ConnectionRepository { get; private set ; }
 
         public IUserRepository UserRepository { get; private set; }
         public async Task Complete()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public void CompleteNA()
+        {
+            _context.SaveChanges();
         }
     }
 }

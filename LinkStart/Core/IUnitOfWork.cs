@@ -12,8 +12,12 @@ namespace LinkStart.Core
 
         IPostRepository PostRepository { get; }
 
+        IConnectionRepository ConnectionRepository { get; }
+
         /*IUserRoleRepository UserRoleRepository { get}*/
         Task Complete();
+
+        void CompleteNA();
 
     }
 }

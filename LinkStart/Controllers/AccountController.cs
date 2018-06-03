@@ -80,7 +80,7 @@ namespace LinkStart.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Blog");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -125,6 +125,7 @@ namespace LinkStart.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                  
                     return RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -167,7 +168,7 @@ namespace LinkStart.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Blog");
                 }
                 AddErrors(result);
             }
@@ -407,7 +408,7 @@ namespace LinkStart.Controllers
             return View();
         }
 
-        public ActionResult Unauthorize()
+        public ActionResult Unauthorize(string ReturnUrl)
         {
             return View();
         }
